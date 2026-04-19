@@ -1,0 +1,39 @@
+/* Главная страница */
+.distro-card-image {
+    max-width: 100px !important;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.5s ease-in-out;
+}
+
+.main-content {
+    margin: 10px 10px;
+}
+
+.go-to-distro-wiki {
+    transition: all 0.5s ease-out;
+    opacity: 1.0;
+    display: block;
+}
+
+.go-to-distro-wiki:hover {
+    opacity: 0.5;
+}
+
+.go-to-distro-wiki:hover .distro-card-image {
+    transform: rotate(360deg);
+}
+
+/* Форма регистрации */
+
+.custom-registration-form {
+    display: flex;
+    justify-content: center;
+}
+.custom-registration-form form {
+    align-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    max-width: 600px;
+}
