@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,6 +26,9 @@ session_start();
         <a href="view/user/authorization_user.php" class="btn btn-outline-primary me-2">Войти</a>
         <a href="view/user/register_user.php" class="btn btn-primary">Зарегистрироваться</a>
     <?php else: ?>
+        <a href="#" class="lead">username</a>
+        <img src="storage/default_avatar.webp"
+             class="rounded-circle me-3" alt="Avatar" width="45" height="45">
         <a href="controller/logout_user.php" class="btn btn-outline-primary me2">Выйти</a>
     <?php endif; ?>
     </div>

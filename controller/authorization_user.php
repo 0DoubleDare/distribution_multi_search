@@ -4,8 +4,9 @@ require "../config.php";
 require "../model/main.php";
 
 $value = checkAuthorizedUser($pdo, $_POST['username'], $_POST['password']);
+print_r($_POST);
+
 //echo $value;
-echo $_SESSION['user_id'];
 if (isset($value)) {
     $_SESSION['user_id'] = $value;
     header('Location: ../index.php');

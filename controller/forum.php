@@ -7,7 +7,6 @@ if (empty($_GET['id'])) {
 } else {
     $posts = getPostsByDistribution($pdo, $_GET['id']);
 }
-//$posts = getAllPosts($pdo);
 $distros = getAllLinuxDistributions($pdo);
 $categories = getAllPostCategory($pdo);
 

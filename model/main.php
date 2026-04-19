@@ -22,12 +22,23 @@ function loginUser($pdo, $data) {
 
 }
 
-function addPost($pdo, $data) {
-
+function insertPost($pdo, $data) {
+    $sql = "INSERT INTO posts(user_id, title, content, distribution_id, category_id)
+    VALUES(:user_id, :title, :content, :distribution_id, :category_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($data);
+    return $pdo->lastInsertId();
 }
 
 function removePost($pdo, $data) {
 
+}
+
+function getUserById($pdo, $id) {
+    $sql = "SELECT * FROM users WHERE users.id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function getAllPosts($pdo) {
@@ -48,16 +59,16 @@ function getPostsByDistribution($pdo, $id) {
             p.title,
             p.content,
             p.id AS post_id,
-            c.name AS category -- Используем алиас c
+            c.name AS category
         FROM posts p
                  JOIN users u ON p.user_id = u.id
-                 JOIN linux_distributions d ON p.distribution_type = d.id
-                 JOIN post_categories c ON p.category = c.id -- Добавляем связь с категориями
-        WHERE p.distribution_type = :id
+                 JOIN linux_distributions d ON p.distribution_id = d.id
+                 JOIN post_categories c ON p.category_id = c.id
+        WHERE p.distribution_id = :id
         ORDER BY p.post_created_at DESC;
     ";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $id]);
+    $stmt->execute([':id' => $id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
