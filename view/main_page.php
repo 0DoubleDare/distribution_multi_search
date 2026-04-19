@@ -17,9 +17,9 @@
     </a>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Главная</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Посетить форум</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">О нас</a></li>
+        <li><a href="#" style="text-decoration: line-through" class="nav-link px-2 link-dark">Посетить форум</a></li>
+        <li><a href="#" style="text-decoration: line-through" class="nav-link px-2 link-dark">FAQs</a></li>
+        <li><a href="#" style="text-decoration: line-through" class="nav-link px-2 link-dark">О нас</a></li>
     </ul>
     <div class="col-md-3 text-end">
     <?php if (empty($_SESSION['user_id'])): ?>
@@ -34,7 +34,7 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
         <?php foreach($distros as $dist):?>
             <div class="col">
                 <div class="card h-100">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <small class="text-body-secondary"> Количество постов: <?= $dist['posts_count'] ?></small>
-                        <a href="<?= $dist['official_wiki_url'] ?>" class="text-body-secondary">Go</a>
+                        <a href="<?= $dist['official_wiki_url'] ?>" class="text-body-secondary opacity-50">Wiki</a>
                     </div>
                 </div>
             </div>

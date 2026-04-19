@@ -52,6 +52,7 @@ function getPostsByDistribution($pdo, $id) {
     $sql = "
         SELECT
             u.username,
+            u.display_name AS user_display_name,
             u.avatar_path AS user_avatar,
             u.id AS user_id,
             d.name AS distro_name,

@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Текст поста</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <input name="user_id" type="hidden" value="<?= $_SESSION['user_id'] ?>">
