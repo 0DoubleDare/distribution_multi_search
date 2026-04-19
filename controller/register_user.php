@@ -3,10 +3,6 @@ session_start();
 require '../config.php';
 require '../model/main.php';
 
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
-
 // Проверка - существует ли пользователь с таким же именем / почтой
 $sql = "SELECT * FROM users WHERE username = :username OR email = :email";
 $stmt = $pdo->prepare($sql);
@@ -14,6 +10,7 @@ $stmt->bindParam(":username", $_POST['username']);
 $stmt->bindParam(":email", $_POST['email']);
 $stmt->execute();
 
+// TODO: Добавить конструкцию try - catch
 // Проверка - совпадают ли пароли
 if ($_POST['password'] != $_POST['repeat_password'] || $stmt->rowCount() > 0) {
     http_response_code(422);

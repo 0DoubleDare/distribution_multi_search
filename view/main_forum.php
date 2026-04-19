@@ -30,6 +30,7 @@
         </select>
         <label for="floatingSelect">Категория поста</label>
     </div>
+    <a href="" class="btn btn-outline-secondary">Secondary</a>
     <?php foreach($posts as $post): ?>
         <div class="card shadow-sm mb-4" style="max-width: 600px;">
             <!-- Шапка: Аватар, Ник, Время, Дистрибутив -->

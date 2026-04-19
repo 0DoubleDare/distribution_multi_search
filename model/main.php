@@ -66,3 +66,21 @@ function getAllPostCategory($pdo) {
     $stmt = $pdo->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function checkAuthorizedUser($pdo, $username, $password) {
+    try {
+        $sql = "SELECT id, password FROM users WHERE username = :username";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+//            print_r($user);
+            if (password_verify($password, $user['password'])) {
+                return $user['id'];
+            }
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}

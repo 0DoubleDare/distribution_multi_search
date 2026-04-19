@@ -29,7 +29,7 @@ session_start();
         <a href="view/user/authorization_user.php" class="btn btn-outline-primary me-2">Войти</a>
         <a href="view/user/register_user.php" class="btn btn-primary">Зарегистрироваться</a>
     <?php else: ?>
-        <a href="" class="btn btn-outline-primary me2">Выйти</a>
+        <a href="controller/logout_user.php" class="btn btn-outline-primary me2">Выйти</a>
     <?php endif; ?>
     </div>
 </header>
