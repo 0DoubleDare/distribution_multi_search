@@ -4,7 +4,7 @@ require "../config.php";
 require "../model/main.php";
 
 if (empty($_SESSION['user_id'])) {
-    header("Location: ../view/main_forum.php");
+    header("Location: ../index.php");
 } else {
     $distros = getAllLinuxDistributions($pdo);
     $categories = getAllPostCategory($pdo);

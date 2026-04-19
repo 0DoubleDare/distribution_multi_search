@@ -66,7 +66,7 @@ CREATE TABLE `linux_distributions` (
   `official_wiki_url` text DEFAULT NULL,
   `icon_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,11 +76,15 @@ CREATE TABLE `linux_distributions` (
 LOCK TABLES `linux_distributions` WRITE;
 /*!40000 ALTER TABLE `linux_distributions` DISABLE KEYS */;
 INSERT INTO `linux_distributions` VALUES
-(1,'NixOS',3,'Топчик','https://wiki.nixos.org/wiki/NixOS_Wiki','nixos_icon'),
+(1,'NixOS',4,'Топчик','https://wiki.nixos.org/wiki/NixOS_Wiki','nixos_icon'),
 (2,'Fedora',0,'Проверенный старичок fffffffffffffffffffffffffffffffffffffffffffffffffsdsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk','https://fedoraproject.org/wiki/Fedora_Project_Wiki/ru','fedora_icon'),
 (3,'Ubuntu',1,'Самый популярный дистрибутив и является первым заходом в мир линукс для новичков','https://wiki.ubuntu.com/','ubuntu_icon'),
-(4,'Arch',1,'Для хардорщиков','https://wiki.archlinux.org/title/Main_page','arch_linux_icon'),
-(5,'CachyOS',1,'На базе арча + топчик','https://wiki.cachyos.org/','cachyos_icon');
+(4,'Arch',2,'Для хардорщиков','https://wiki.archlinux.org/title/Main_page','arch_linux_icon'),
+(5,'CachyOS',1,'На базе арча + топчик','https://wiki.cachyos.org/','cachyos_icon'),
+(6,'OpenSUSE',1,'НЕ ЗМЕЙКА','https://ru.opensuse.org/','opensuse_icon'),
+(7,'Void Linux',1,'Долой systemd','https://docs.voidlinux.org/','void_linux_icon'),
+(8,'Debian',0,'Стабильность и безопасность))))','https://wiki.debian.org/','debian_icon'),
+(9,'Red Hat',1,'платно!??!!??!!1','https://www.redhat.com/','redhat_icon');
 /*!40000 ALTER TABLE `linux_distributions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +138,7 @@ CREATE TABLE `posts` (
   CONSTRAINT `fk_category_key` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`),
   CONSTRAINT `fk_distribution_type_key` FOREIGN KEY (`distribution_id`) REFERENCES `linux_distributions` (`id`),
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +153,12 @@ INSERT INTO `posts` VALUES
 (6,12,'dasdsa','dasdasdasdasd',1,1,'2026-04-19 14:19:20'),
 (7,12,'ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС','ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКСЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС ЛИНУКС',3,4,'2026-04-19 14:20:44'),
 (8,12,'CachyOS норм или не норм?','lorem',5,2,'2026-04-19 14:50:38'),
-(9,12,'hjkhjkhkjh','ggjhgjhgjhgjh',4,4,'2026-04-19 14:51:32');
+(9,12,'hjkhjkhkjh','ggjhgjhgjhgjh',4,4,'2026-04-19 14:51:32'),
+(10,13,'Симлинки','СИМЛИНКИ',4,1,'2026-04-19 15:52:33'),
+(11,13,'Заголовой','ФИГАСЕ ХАМЕЛЕОН',6,1,'2026-04-19 15:57:38'),
+(12,12,'ФИГАСЕ ЭТО КТО','Пупупупупупупупупупу',7,1,'2026-04-19 16:09:15'),
+(13,12,'Беслпатно','Как взломать redhat линукс ',1,1,'2026-04-19 16:24:13'),
+(14,12,'Как','авыа',9,1,'2026-04-19 16:24:39');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -231,7 +240,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `display_name` varchar(255) DEFAULT NULL COMMENT 'Отображаемое имя пользователя которое не должно быть уникальным',
   `username` varchar(500) NOT NULL,
   `password` varchar(2048) DEFAULT NULL,
@@ -245,7 +254,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`),
   KEY `fk_user_type` (`user_type_id`),
   CONSTRAINT `fk_user_type` FOREIGN KEY (`user_type_id`) REFERENCES `user_privileges` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +264,8 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(12,'Никита','NeKet','$2y$12$Jiakyag6zmEsBztu1goqMOCg3bUOYPrVKCnv2W/4zJB2XEUUA8Cd2','lidernikita@gmail.com',NULL,100,1,'2026-04-19 11:21:43',NULL);
+(12,'Никита','NeKet','$2y$12$Jiakyag6zmEsBztu1goqMOCg3bUOYPrVKCnv2W/4zJB2XEUUA8Cd2','lidernikita@gmail.com',NULL,100,1,'2026-04-19 11:21:43',NULL),
+(13,'2342','dfsdfsdfsdf','$2y$12$0Ka9M7q7vp5T1QxzQGei3.1zLD5qhAcfeN.mPJdWh/jUtF1PkZxIq','eew@example.com',NULL,100,1,'2026-04-19 15:51:43',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -268,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-19 19:10:48
+-- Dump completed on 2026-04-19 20:27:22

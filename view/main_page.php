@@ -26,7 +26,7 @@
         <a href="view/user/authorization_user.php" class="btn btn-outline-primary me-2">Войти</a>
         <a href="view/user/register_user.php" class="btn btn-primary">Зарегистрироваться</a>
     <?php else: ?>
-        <a href="#" class="lead">username</a>
+        <a href="#" class="lead"><?= isset($user['display_name']) ? $user['display_name'] : 'Гость'?></a>
         <img src="storage/default_avatar.webp"
              class="rounded-circle me-3" alt="Avatar" width="45" height="45">
         <a href="controller/logout_user.php" class="btn btn-outline-primary me2">Выйти</a>
@@ -34,11 +34,13 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
         <?php foreach($distros as $dist):?>
             <div class="col">
                 <div class="card h-100">
-                    <a href="./controller/forum.php?id=<?=$dist['id']?>" class="go-to-distro-wiki"><img src="style/images/<?= $dist['icon_name']?>.png" class="card-img-top distro-card-image" alt="..."></a>
+                    <a href="./controller/forum.php?id=<?=$dist['id']?>" class="go-to-distro-wiki">
+                        <img src="style/images/<?= $dist['icon_name']?>.png" class="card-img-top distro-card-image" alt="<?= $dist['icon_name'] ?>">
+                    </a>
                     <div class="card-body">
                         <h5 class="card-title"><?= $dist['name']?></h5>
                         <small class="card-text"><?= $dist['description']?></small>

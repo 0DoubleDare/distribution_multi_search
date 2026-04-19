@@ -4,6 +4,8 @@ require 'config.php';
 require 'model/main.php';
 
 $distros = getAllLinuxDistributions($pdo);
-$user =
+if (isset($_SESSION['user_id'])) {
+    $user = getUserById($pdo, $_SESSION['user_id']);
+}
 include "view/main_page.php"
 ?>
