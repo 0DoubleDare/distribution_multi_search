@@ -4,7 +4,7 @@ require "../config.php";
 require "../model/main.php";
 
 $user_info = checkAuthorizedUser($pdo, $_POST['username'], $_POST['password']);
-print_r($_POST);
+//print_r($_POST);
 
 //echo $value;
 if (isset($user_info)) {

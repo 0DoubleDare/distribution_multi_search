@@ -27,4 +27,5 @@ if ($_POST['password'] != $_POST['repeat_password'] || $stmt->rowCount() > 0) {
     if (isset($_POST['remember_me'])) {
         $_SESSION['user_info'] = $user_info;
     }
+    header("Location: ../index.php");
 }

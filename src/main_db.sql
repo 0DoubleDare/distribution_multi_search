@@ -43,20 +43,28 @@ CREATE TABLE `comments` (
   KEY `fk_comment_post_id` (`post_id`),
   CONSTRAINT `fk_comment_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_comment_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `comments`
 --
 
-LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
 INSERT INTO `comments` VALUES
 (1,7,12,'Фигня пост удаляй',0,'2026-04-20 18:57:54'),
-(2,7,12,'ЛООООООООЛ',0,'2026-04-21 04:44:14');
+(2,7,12,'ЛООООООООЛ',0,'2026-04-21 04:44:14'),
+(4,18,12,'fsdfsd',0,'2026-04-21 10:50:36'),
+(5,18,12,'fsdfsd',0,'2026-04-21 10:51:16'),
+(6,18,12,'Приве как дела',0,'2026-04-21 10:51:43'),
+(7,18,12,'Неплохо брат',0,'2026-04-21 10:51:51'),
+(8,18,12,'КККККККККККККККККККККККККККККККККККК',0,'2026-04-21 10:51:57'),
+(9,16,12,'Не спамь уродец',0,'2026-04-21 10:53:04'),
+(10,8,12,'Неплохой дистро для ГЕЙМЕРОВ',0,'2026-04-21 10:55:00'),
+(11,16,14,'Как дела та',0,'2026-04-21 12:11:58'),
+(12,25,14,'sudo chmod +777 users:users',0,'2026-04-21 12:12:50'),
+(13,27,12,'Спасибо',0,'2026-04-21 13:26:17');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `linux_distributions`
@@ -80,20 +88,18 @@ CREATE TABLE `linux_distributions` (
 -- Dumping data for table `linux_distributions`
 --
 
-LOCK TABLES `linux_distributions` WRITE;
 /*!40000 ALTER TABLE `linux_distributions` DISABLE KEYS */;
 INSERT INTO `linux_distributions` VALUES
-(1,'NixOS',4,'Топчик','https://wiki.nixos.org/wiki/NixOS_Wiki','nixos_icon'),
-(2,'Fedora',1,'Проверенный старичок fffffffffffffffffffffffffffffffffffffffffffffffffsdsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk','https://fedoraproject.org/wiki/Fedora_Project_Wiki/ru','fedora_icon'),
-(3,'Ubuntu',2,'Самый популярный дистрибутив и является первым заходом в мир линукс для новичков','https://wiki.ubuntu.com/','ubuntu_icon'),
-(4,'Arch',2,'Для хардорщиков','https://wiki.archlinux.org/title/Main_page','arch_linux_icon'),
-(5,'CachyOS',1,'На базе арча + топчик','https://wiki.cachyos.org/','cachyos_icon'),
-(6,'OpenSUSE',3,'НЕ ЗМЕЙКА','https://ru.opensuse.org/','opensuse_icon'),
-(7,'Void Linux',1,'Долой systemd','https://docs.voidlinux.org/','void_linux_icon'),
-(8,'Debian',0,'Стабильность и безопасность))))','https://wiki.debian.org/','debian_icon'),
-(9,'Red Hat',1,'платно!??!!??!!1','https://www.redhat.com/','redhat_icon');
+(1,'NixOS',7,'Неубиваемая система с декларативным подходом: вся конфигурация описывается в одном файле, что позволяет мгновенно откатывать любые изменения.','https://wiki.nixos.org/wiki/NixOS_Wiki','nixos_icon'),
+(2,'Fedora',3,'Полигон инноваций: всегда свежее ПО и самые новые технологии (Wayland, Btrfs), которые позже становятся стандартом в мире Linux.','https://fedoraproject.org/wiki/Fedora_Project_Wiki/ru','fedora_icon'),
+(3,'Ubuntu',2,'Золотой стандарт дружелюбности: самый популярный дистрибутив с огромным сообществом и гарантированной поддержкой любого софта.','https://wiki.ubuntu.com/','ubuntu_icon'),
+(4,'Arch',2,'Конструктор «Сделай сам»: минималистичная база с философией KISS и доступом к AUR — самому большому репозиторию пользовательских пакетов.','https://wiki.archlinux.org/title/Main_page','arch_linux_icon'),
+(5,'CachyOS',1,'Arch на стероидах: оптимизирован под максимальную производительность процессора и отзывчивость интерфейса «из коробки».','https://wiki.cachyos.org/','cachyos_icon'),
+(6,'OpenSUSE',3,'Немецкая точность и YaST: лучший графический центр управления системой и уникальная файловая структура с автоматическими снимками системы.','https://ru.opensuse.org/','opensuse_icon'),
+(7,'Void Linux',2,'Независимый минимализм: не использует systemd, работает на молниеносном менеджере пакетов XBPS и подходит для тех, кто ценит простоту и скорость.','https://docs.voidlinux.org/','void_linux_icon'),
+(8,'Debian',1,'«Универсальная ОС»: эталон стабильности и надежности, на котором держится половина интернета и сотни других дистрибутивов.','https://wiki.debian.org/','debian_icon'),
+(9,'Red Hat',3,'Корпоративная крепость: платное решение для бизнеса с десятилетней поддержкой, строгими стандартами безопасности и сертификациями.','https://www.redhat.com/','redhat_icon');
 /*!40000 ALTER TABLE `linux_distributions` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `post_categories`
@@ -113,7 +119,6 @@ CREATE TABLE `post_categories` (
 -- Dumping data for table `post_categories`
 --
 
-LOCK TABLES `post_categories` WRITE;
 /*!40000 ALTER TABLE `post_categories` DISABLE KEYS */;
 INSERT INTO `post_categories` VALUES
 (1,'помощь'),
@@ -121,7 +126,6 @@ INSERT INTO `post_categories` VALUES
 (3,'полезно'),
 (4,'шутка');
 /*!40000 ALTER TABLE `post_categories` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `posts`
@@ -145,14 +149,13 @@ CREATE TABLE `posts` (
   CONSTRAINT `fk_category_key` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`),
   CONSTRAINT `fk_distribution_type_key` FOREIGN KEY (`distribution_id`) REFERENCES `linux_distributions` (`id`),
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `posts`
 --
 
-LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 INSERT INTO `posts` VALUES
 (2,12,'Привет чувак','Мега крутой пост',1,1,'2026-04-19 12:22:13'),
@@ -169,9 +172,17 @@ INSERT INTO `posts` VALUES
 (15,12,'Десктоп','Опен сус норм или стрем как десктом? БЛИН',6,2,'2026-04-20 06:00:14'),
 (16,12,'Пхпхпхпхпхпхппхпхпхпхп','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',2,4,'2026-04-20 07:37:24'),
 (17,12,'ЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕ','ИЕ ИЕ ИЕ ИЕ ИЕ ИЕ И Е ИЕ И Е ИЕ И Е И Е И ЕИЕ И Е И ЕИЕ',6,3,'2026-04-20 16:19:51'),
-(18,12,'Демонстрация','Что делать если сломалась запись экрана',3,2,'2026-04-21 04:46:35');
+(18,12,'Демонстрация','Что делать если сломалась запись экрана',3,2,'2026-04-21 04:46:35'),
+(19,12,'Заголовок','Взлом',9,2,'2026-04-21 10:53:48'),
+(20,14,'Сервер','А',8,1,'2026-04-21 11:04:33'),
+(21,14,'fsdf','sdf',1,1,'2026-04-21 11:10:07'),
+(22,14,'fsdf','sdf',1,1,'2026-04-21 11:32:08'),
+(23,14,'vv','sdfs',9,1,'2026-04-21 11:40:03'),
+(24,14,'fsdf','sdf',7,1,'2026-04-21 11:41:13'),
+(25,14,'Проблема с правами в XAMPP','Что делать подскажите',2,1,'2026-04-21 12:12:35'),
+(26,14,'fsd','fds',2,1,'2026-04-21 12:52:26'),
+(27,14,'Конфигурация докер','Чтобы включить докер в систему добавьте в configuration.nix строку virtualization.docker.enable = true',1,1,'2026-04-21 13:25:46');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -234,14 +245,12 @@ CREATE TABLE `user_privileges` (
 -- Dumping data for table `user_privileges`
 --
 
-LOCK TABLES `user_privileges` WRITE;
 /*!40000 ALTER TABLE `user_privileges` DISABLE KEYS */;
 INSERT INTO `user_privileges` VALUES
 (1,'default'),
 (2,'admin'),
 (3,'moderator');
 /*!40000 ALTER TABLE `user_privileges` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -265,20 +274,19 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`),
   KEY `fk_user_type` (`user_role_id`),
   CONSTRAINT `fk_user_type` FOREIGN KEY (`user_role_id`) REFERENCES `user_privileges` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
 (12,'Никита','NeKet','$2y$12$Jiakyag6zmEsBztu1goqMOCg3bUOYPrVKCnv2W/4zJB2XEUUA8Cd2','lidernikita@gmail.com',NULL,100,1,'2026-04-19 11:21:43',NULL),
-(13,'2342','dfsdfsdfsdf','$2y$12$0Ka9M7q7vp5T1QxzQGei3.1zLD5qhAcfeN.mPJdWh/jUtF1PkZxIq','eew@example.com',NULL,100,1,'2026-04-19 15:51:43',NULL);
+(13,'2342','dfsdfsdfsdf','$2y$12$0Ka9M7q7vp5T1QxzQGei3.1zLD5qhAcfeN.mPJdWh/jUtF1PkZxIq','eew@example.com',NULL,100,1,'2026-04-19 15:51:43',NULL),
+(14,'Сергей Викторович','rahmanin','$2y$12$tPRU7wXfMeqZd93a99IqlePtQGbCn2cPiOE998GeT0fTCog9Rq7Ue','popa@gmail.com',NULL,100,1,'2026-04-21 10:57:53',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -289,4 +297,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-21  8:53:33
+-- Dump completed on 2026-04-21 19:47:26

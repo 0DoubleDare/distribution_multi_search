@@ -14,11 +14,13 @@ function registrationUser($pdo, $data) {
     $stmt->execute($data);
     $user_id = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare("SELECT id, user_type_id FROM users WHERE users.id = :id");
+    $stmt = $pdo->prepare("SELECT id, user_role_id FROM users WHERE users.id = :id");
     $stmt->execute(['id' => $user_id]);
     $user_info = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $user_info;
+    return [
+        "user_id" => $user_info['id'],
+        "user_role_id" => $user_info['user_role_id']
+    ];
 }
 
 function loginUser($pdo, $data) {
@@ -47,6 +49,30 @@ function getUserById($pdo, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function getPostsByCategoryAndDistribution($pdo, $category_id, $distribution_id) {
+    $sql = "
+        SELECT
+            u.username,
+            u.display_name AS user_display_name,
+            u.avatar_path AS user_avatar,
+            u.id AS user_id,
+            d.name AS distro_name,
+            p.post_created_at,
+            p.title,
+            p.content,
+            p.id AS post_id,
+            c.name AS category
+        FROM posts p
+                 JOIN users u ON p.user_id = u.id
+                 JOIN linux_distributions d ON p.distribution_id = d.id
+                 JOIN post_categories c ON p.category_id = c.id
+        WHERE p.distribution_id = :distro_id AND p.category_id = :category_id
+        ORDER BY p.post_created_at DESC;
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['distro_id' => $distribution_id, 'category_id' => $category_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 function getAllPosts($pdo) {
     $sql = "SELECT * FROM posts";
     $stmt = $pdo->query($sql);
@@ -122,4 +148,15 @@ function checkAuthorizedUser($pdo, $username, $password) {
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
+}
+
+function addCommentToPost($pdo, $post_id, $user_id, $comment) {
+    $sql = "INSERT INTO comments(post_id, user_id, content) VALUES(:post_id, :user_id, :content)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':post_id' => $post_id,
+        ':user_id' => $user_id,
+        ':content' => $comment
+    ]);
+    return $pdo->lastInsertId();
 }

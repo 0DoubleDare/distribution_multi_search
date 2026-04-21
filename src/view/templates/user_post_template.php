@@ -22,16 +22,16 @@
     </div>
 
     <!-- Футер с кнопками взаимодействия -->
-    <div class="card-footer bg-white border-top-0 d-flex align-items-center py-3">
-        <div class="btn-group me-3" role="group">
-            <button type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-hand-thumbs-up"></i> 42</button>
-            <button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-hand-thumbs-down"></i> 3</button>
-        </div>
-        <!-- Кнопка развертывания комментариев (опционально) -->
-        <button class="btn btn-link btn-sm text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#comments-<?= $post['post_id'] ?>">
-            <i class="bi bi-chat-left-text"></i> Комментарии
-        </button>
-    </div>
+<!--    <div class="card-footer bg-white border-top-0 d-flex align-items-center py-3">-->
+<!--        <div class="btn-group me-3" role="group">-->
+<!--            <button type="button" class="btn btn-outline-success btn-sm"><i class="bi bi-hand-thumbs-up"></i> 42</button>-->
+<!--            <button type="button" class="btn btn-outline-danger btn-sm"><i class="bi bi-hand-thumbs-down"></i> 3</button>-->
+<!--        </div>-->
+<!--        <!-- Кнопка развертывания комментариев (опционально) -->
+<!--        <button class="btn btn-link btn-sm text-decoration-none" type="button" data-bs-toggle="collapse" data-bs-target="#comments---><?php //= $post['post_id'] ?><!--">-->
+<!--            <i class="bi bi-chat-left-text"></i> Комментарии-->
+<!--        </button>-->
+<!--    </div>-->
 
     <!-- Секция комментариев -->
     <div class="collapse show" id="comments-<?= $post['post_id'] ?>">
@@ -59,10 +59,10 @@
 
             <!-- Форма добавления -->
             <?php if (isset($_SESSION['user_info']['user_id'])): ?>
-                <form action="../controller/add_comment.php" method="POST" class="d-flex gap-2">
+                <form action="../controller/add_comment_to_post.php?id=<?= $_GET['id']?>" method="POST" class="d-flex gap-2">
                     <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
                     <input type="text" name="content" class="form-control form-control-sm" placeholder="Напишите ответ..." required>
-                    <button type="submit" class="btn btn-primary btn-sm px-3">OK</button>
+                    <button type="submit" class="btn btn-primary btn-sm px-3">Оставить комментарий</button>
                 </form>
             <?php endif; ?>
 

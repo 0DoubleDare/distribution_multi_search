@@ -12,6 +12,7 @@
 <body>
 <div class="container">
     <form action="insert_post.php" method="post">
+<!--        <input name="distro_id" type="hidden" value='--><?php //= $_GET['id'] ?><!--' >-->
         <div class="mb-3">
             <input name="title" placeholder="Заголовок поста" type="text" class="form-control" id="exampleInputPassword1" required>
         </div>
@@ -20,7 +21,7 @@
                 <div class="form-floating">
                     <select name="distribution_id" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                         <?php foreach($distros as $dist): ?>
-                            <option value="<?php echo $dist['id'] ?>">
+                            <option value="<?php echo $dist['id'] ?>" <?= $dist['id'] == $_GET['id'] ? 'selected' : ''?>>
                                 <?php echo $dist['name'] ?>
                             </option>
                         <?php endforeach; ?>
