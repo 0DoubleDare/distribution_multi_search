@@ -25,30 +25,37 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `distro_multi_search` /*!40100 DEFAULT 
 USE `distro_multi_search`;
 
 --
--- Table structure for table `coments`
+-- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `coments`;
+DROP TABLE IF EXISTS `comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `coments` (
+CREATE TABLE `comments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL COMMENT 'К какому посту относится комментарий',
-  `user_id` int(11) DEFAULT NULL COMMENT 'к какому пользователю относится комментарий',
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `content` mediumtext DEFAULT NULL,
-  `likes` int(11) DEFAULT NULL,
-  `dislike` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `votes` int(11) NOT NULL DEFAULT 0,
+  `comment_created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_comment_user_id` (`user_id`),
+  KEY `fk_comment_post_id` (`post_id`),
+  CONSTRAINT `fk_comment_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_comment_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `coments`
+-- Dumping data for table `comments`
 --
 
-LOCK TABLES `coments` WRITE;
-/*!40000 ALTER TABLE `coments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `coments` ENABLE KEYS */;
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES
+(1,7,12,'Фигня пост удаляй',0,'2026-04-20 18:57:54'),
+(2,7,12,'ЛООООООООЛ',0,'2026-04-21 04:44:14');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -77,11 +84,11 @@ LOCK TABLES `linux_distributions` WRITE;
 /*!40000 ALTER TABLE `linux_distributions` DISABLE KEYS */;
 INSERT INTO `linux_distributions` VALUES
 (1,'NixOS',4,'Топчик','https://wiki.nixos.org/wiki/NixOS_Wiki','nixos_icon'),
-(2,'Fedora',0,'Проверенный старичок fffffffffffffffffffffffffffffffffffffffffffffffffsdsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk','https://fedoraproject.org/wiki/Fedora_Project_Wiki/ru','fedora_icon'),
-(3,'Ubuntu',1,'Самый популярный дистрибутив и является первым заходом в мир линукс для новичков','https://wiki.ubuntu.com/','ubuntu_icon'),
+(2,'Fedora',1,'Проверенный старичок fffffffffffffffffffffffffffffffffffffffffffffffffsdsdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk','https://fedoraproject.org/wiki/Fedora_Project_Wiki/ru','fedora_icon'),
+(3,'Ubuntu',2,'Самый популярный дистрибутив и является первым заходом в мир линукс для новичков','https://wiki.ubuntu.com/','ubuntu_icon'),
 (4,'Arch',2,'Для хардорщиков','https://wiki.archlinux.org/title/Main_page','arch_linux_icon'),
 (5,'CachyOS',1,'На базе арча + топчик','https://wiki.cachyos.org/','cachyos_icon'),
-(6,'OpenSUSE',1,'НЕ ЗМЕЙКА','https://ru.opensuse.org/','opensuse_icon'),
+(6,'OpenSUSE',3,'НЕ ЗМЕЙКА','https://ru.opensuse.org/','opensuse_icon'),
 (7,'Void Linux',1,'Долой systemd','https://docs.voidlinux.org/','void_linux_icon'),
 (8,'Debian',0,'Стабильность и безопасность))))','https://wiki.debian.org/','debian_icon'),
 (9,'Red Hat',1,'платно!??!!??!!1','https://www.redhat.com/','redhat_icon');
@@ -124,7 +131,7 @@ DROP TABLE IF EXISTS `posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `posts` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` text DEFAULT NULL,
@@ -138,7 +145,7 @@ CREATE TABLE `posts` (
   CONSTRAINT `fk_category_key` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`),
   CONSTRAINT `fk_distribution_type_key` FOREIGN KEY (`distribution_id`) REFERENCES `linux_distributions` (`id`),
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +165,11 @@ INSERT INTO `posts` VALUES
 (11,13,'Заголовой','ФИГАСЕ ХАМЕЛЕОН',6,1,'2026-04-19 15:57:38'),
 (12,12,'ФИГАСЕ ЭТО КТО','Пупупупупупупупупупу',7,1,'2026-04-19 16:09:15'),
 (13,12,'Беслпатно','Как взломать redhat линукс ',1,1,'2026-04-19 16:24:13'),
-(14,12,'Как','авыа',9,1,'2026-04-19 16:24:39');
+(14,12,'Как','авыа',9,1,'2026-04-19 16:24:39'),
+(15,12,'Десктоп','Опен сус норм или стрем как десктом? БЛИН',6,2,'2026-04-20 06:00:14'),
+(16,12,'Пхпхпхпхпхпхппхпхпхпхп','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',2,4,'2026-04-20 07:37:24'),
+(17,12,'ЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕ','ИЕ ИЕ ИЕ ИЕ ИЕ ИЕ И Е ИЕ И Е ИЕ И Е И Е И ЕИЕ И Е И ЕИЕ',6,3,'2026-04-20 16:19:51'),
+(18,12,'Демонстрация','Что делать если сломалась запись экрана',3,2,'2026-04-21 04:46:35');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -247,13 +258,13 @@ CREATE TABLE `users` (
   `email` varchar(500) DEFAULT NULL,
   `avatar_path` varchar(500) DEFAULT NULL,
   `carma` int(11) DEFAULT 100 COMMENT 'Репутация пользователя, представляет из себя целое число  и по умолчанию у каждого пользователя 100 кармы. Чем ниже - тем хуже человек',
-  `user_type_id` int(11) DEFAULT 1,
+  `user_role_id` int(11) DEFAULT 1,
   `account_created` timestamp NULL DEFAULT current_timestamp(),
   `account_deleted` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  KEY `fk_user_type` (`user_type_id`),
-  CONSTRAINT `fk_user_type` FOREIGN KEY (`user_type_id`) REFERENCES `user_privileges` (`id`)
+  KEY `fk_user_type` (`user_role_id`),
+  CONSTRAINT `fk_user_type` FOREIGN KEY (`user_role_id`) REFERENCES `user_privileges` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -278,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-19 20:27:22
+-- Dump completed on 2026-04-21  8:53:33
