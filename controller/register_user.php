@@ -23,8 +23,8 @@ if ($_POST['password'] != $_POST['repeat_password'] || $stmt->rowCount() > 0) {
         'password' => $password,
         'email' => $_POST['email'],
     ];
-    $user_id = registrationUser($pdo, $data);
+    $user_info = registrationUser($pdo, $data);
     if (isset($_POST['remember_me'])) {
-        $_SESSION['user_id'] = $user_id;
+        $_SESSION['user_info'] = $user_info;
     }
 }

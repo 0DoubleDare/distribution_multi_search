@@ -13,7 +13,7 @@
 <body>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" >
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <img class="me-2" src="style/images/img.png" alt="main-site-icon" height="40">
+        <img class="me-2" src="style/images/main_brand_icon.png" alt="main-site-icon" height="40">
     </a>
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Главная</a></li>
@@ -22,7 +22,7 @@
         <li><a href="#" style="text-decoration: line-through" class="nav-link px-2 link-dark">О нас</a></li>
     </ul>
     <div class="col-md-3 text-end">
-    <?php if (empty($_SESSION['user_id'])): ?>
+    <?php if (empty($_SESSION['user_info']['user_id'])): ?>
         <a href="view/user/authorization_user.php" class="btn btn-outline-primary me-2">Войти</a>
         <a href="view/user/register_user.php" class="btn btn-primary">Зарегистрироваться</a>
     <?php else: ?>
@@ -34,12 +34,15 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="row row-cols-2 row-cols-md-4 g-4">
         <?php foreach($distros as $dist):?>
             <div class="col">
                 <div class="card h-100">
-                    <a href="./controller/forum.php?id=<?=$dist['id']?>" class="go-to-distro-wiki">
-                        <img src="style/images/<?= $dist['icon_name']?>.png" class="card-img-top distro-card-image" alt="<?= $dist['icon_name'] ?>">
+                    <a href="./controller/forum.php?id=<?=$dist['id']?>" class="go-to-distro-wiki d-block">
+                        <img src="style/images/<?= $dist['icon_name']?>.png"
+                             class="distro-card-image"
+                             alt="<?= $dist['icon_name'] ?>"
+                             style="width: 128px; height: 128px; object-fit: contain;">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title"><?= $dist['name']?></h5>

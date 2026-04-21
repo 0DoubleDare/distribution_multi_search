@@ -43,7 +43,7 @@
             <label for="exampleFormControlTextarea1" class="form-label">Текст поста</label>
             <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <input name="user_id" type="hidden" value="<?= $_SESSION['user_id'] ?>">
+        <input name="user_id" type="hidden" value="<?= $_SESSION['user_info']['user_id'] ?>">
         <button class="btn btn-primary" type="submit">Создать</button>
     </form>
 </div>

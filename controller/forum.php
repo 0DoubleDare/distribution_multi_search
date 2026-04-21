@@ -9,6 +9,7 @@ if (empty($_GET['id'])) {
 }
 $distros = getAllLinuxDistributions($pdo);
 $categories = getAllPostCategory($pdo);
+$comments = getCommentaryByDistribution($pdo, $_GET['id']);
 
 include '../view/main_forum.php';
 
