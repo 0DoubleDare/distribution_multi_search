@@ -118,10 +118,10 @@ CREATE TABLE `post_categories` (
 
 /*!40000 ALTER TABLE `post_categories` DISABLE KEYS */;
 INSERT INTO `post_categories` VALUES
-(1,'помощь'),
-(2,'вопрос'),
-(3,'полезно'),
-(4,'шутка');
+(1,'Помощь'),
+(2,'Вопрос'),
+(3,'Полезно'),
+(4,'Шутка');
 /*!40000 ALTER TABLE `post_categories` ENABLE KEYS */;
 
 --
@@ -280,4 +280,4 @@ INSERT INTO `users` VALUES
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-22  8:25:37
+-- Dump completed on 2026-04-22  8:44:37
