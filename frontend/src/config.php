@@ -1,5 +1,5 @@
 <?php
-$host = "db";
+$host = "localhost";
 $dbname = "distro_multi_search";
 //$user = getenv('DB_USER');
 $user = "admin";

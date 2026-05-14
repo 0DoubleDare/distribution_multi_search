@@ -1,0 +1,12 @@
+<?php
+$host = "localhost";
+$dbname = "distro_multi_search";
+$user = "admin";
+$password = "12345678";
+
+$dsn = "mysql:host=$host;dbname=$dbname";
+try {
+    $pdo = new PDO($dsn, $user, $password);
+} catch (PDOException $error) {
+    echo $error->getMessage();
+}

@@ -34,29 +34,10 @@
     </div>
 </header>
 <main class="main-content">
-    <div class="row row-cols-2 row-cols-md-4 g-4">
-        <?php foreach($distros as $dist):?>
-            <div class="col">
-                <div class="card h-100">
-                    <a href="./controller/forum.php?id=<?=$dist['id']?>" class="go-to-distro-wiki d-block">
-                        <img src="style/images/<?= $dist['icon_name']?>.png"
-                             class="distro-card-image"
-                             alt="<?= $dist['icon_name'] ?>"
-                             style="width: 128px; height: 128px; object-fit: contain;">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $dist['name']?></h5>
-                        <small class="card-text"><?= $dist['description']?></small>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <small class="text-body-secondary"> Количество постов: <?= $dist['posts_count'] ?></small>
-                        <a href="<?= $dist['official_wiki_url'] ?>" class="text-body-secondary opacity-50">Wiki</a>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
+    <div class="row row-cols-2 row-cols-md-4 g-4 distro-list">
     </div>
 </main>
+<script src="main.js">getDistroList()</script>
 </body>
 </html>
 
