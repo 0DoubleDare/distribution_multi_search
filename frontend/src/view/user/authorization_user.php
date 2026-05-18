@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <form action="../../controller/authorization_user.php" method="post">
+    <form onsubmit="send_form(event)" method="post" id="authorization_form">
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Имя пользователя</label>
             <input name="username" type="text" class="form-control" id="exampleInputPassword1" required>
@@ -37,5 +37,13 @@
         <button type="submit" class="btn btn-primary">Войти</button>
     </form>
 </div>
+<script src="../../js/post_method.js"></script>
+<script>
+    function send_form(event) {
+        event.preventDefault();
+        const form = document.getElementById('authorization_form')
+        authorizationUser(form);
+    }
+</script>
 </body>
 </html>

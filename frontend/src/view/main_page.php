@@ -11,6 +11,7 @@
     <title>Каталог</title>
 </head>
 <body>
+<?php print_r($_SESSION)?>
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" >
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img class="me-2" src="style/images/main_brand_icon.png" alt="main-site-icon" height="40">
@@ -37,7 +38,8 @@
     <div class="row row-cols-2 row-cols-md-4 g-4 distro-list">
     </div>
 </main>
-<script src="main.js">getDistroList()</script>
+<script src="js/get_method.js"></script>
+<script>getDistroList()</script>
 </body>
 </html>
 

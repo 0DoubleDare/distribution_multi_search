@@ -11,7 +11,7 @@ if (empty($_GET['id'])) {
         $posts = getPostsByDistribution($pdo, $_GET['id']);
     }
 }
-$distros = getAllLinuxDistributions($pdo);
+//$distros = getAllLinuxDistributions($pdo);
 $categories = getAllPostCategory($pdo);
 $comments = getCommentaryByDistribution($pdo, $_GET['id']);
 

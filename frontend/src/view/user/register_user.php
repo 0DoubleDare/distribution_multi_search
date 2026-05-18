@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="container">
-<form action="../../controller/register_user.php" method="post">
+<!--<form action="../../controller/register_user.php" method="post">-->
+    <form method="post" id="registration_form" onsubmit="send_data(event)">
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Отображаемое имя</label>
         <input name="display_name" type="text" class="form-control" id="exampleInputPassword1" required>
@@ -43,5 +44,16 @@
     <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
 </form>
 </div>
+<script src="../../js/post_method.js"></script>
+<script>
+    function send_data(event) {
+        event.preventDefault();
+        const form = document.getElementById('registration_form');
+        registrationUser(form)
+        // const data = new FormData(form);
+        // const popa = Object.fromEntries(data.entries());
+        // console.log(JSON.stringify(popa))
+    }
+</script>
 </body>
 </html>

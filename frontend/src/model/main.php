@@ -1,10 +1,4 @@
 <?php
-function getAllLinuxDistributions($pdo) {
-    $sql = "SELECT * FROM linux_distributions";
-    $distros = $pdo->query($sql)->fetchAll();
-    return $distros;
-}
-
 function registrationUser($pdo, $data) {
     $sql = "
         INSERT INTO users(display_name, username, email, password) 
@@ -24,12 +18,11 @@ function registrationUser($pdo, $data) {
 }
 
 function loginUser($pdo, $data) {
-
 }
 
 function getAllUserInformation($pdo) {
-    $sql = "";
 }
+
 function insertPost($pdo, $data) {
     $sql = "INSERT INTO posts(user_id, title, content, distribution_id, category_id)
     VALUES(:user_id, :title, :content, :distribution_id, :category_id)";

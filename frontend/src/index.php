@@ -6,9 +6,9 @@ session_start();
 require 'config.php';
 require './model/main.php';
 
-$distros = getAllLinuxDistributions($pdo);
 if (isset($_SESSION['user_info']['user_id'])) {
-    $user = getUserById($pdo, $_SESSION['user_info']['user_id']);
+    $user = file_get_contents("http://localhost/distro_multi_search/backend/users/" . $_SESSION['user_info']['user_id']);
+    $user = json_decode($user, true);
 }
 include "view/main_page.php"
 ?>

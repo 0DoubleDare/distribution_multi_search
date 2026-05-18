@@ -1,8 +1,9 @@
 <?php
 session_start();
-require '../config.php';
+//require '../config.php';
 require '../model/main.php';
-
+print_r($_POST);
+$data_send = json_encode($_POST);
 // Проверка - существует ли пользователь с таким же именем / почтой
 $sql = "SELECT * FROM users WHERE username = :username OR email = :email";
 $stmt = $pdo->prepare($sql);
@@ -14,7 +15,7 @@ $stmt->execute();
 // Проверка - совпадают ли пароли
 if ($_POST['password'] != $_POST['repeat_password'] || $stmt->rowCount() > 0) {
     http_response_code(422);
-    header('Location: ../view/user/register_user.php');
+//    header('Location: ../view/user/register_user.php');
 } else {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $data = [
@@ -27,5 +28,8 @@ if ($_POST['password'] != $_POST['repeat_password'] || $stmt->rowCount() > 0) {
     if (isset($_POST['remember_me'])) {
         $_SESSION['user_info'] = $user_info;
     }
-    header("Location: ../index.php");
+//    header("Location: ../index.php");
 }
+
+
+

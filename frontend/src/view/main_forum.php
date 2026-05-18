@@ -37,10 +37,15 @@ session_start()
     <a href="./add_post_redirect_controller.php?id=<?= $_GET['id']?>" class="btn btn-outline-secondary">Добавить пост</a>
     <a href="../index.php" class="btn btn-outline-secondary">На главную страницу</a>
     <div class="container posts">
-    <?php foreach($posts as $post): ?>
-        <?php require 'templates/user_post_template.php' ?>
-    <?php endforeach; ?>
+<!--    --><?php //foreach($posts as $post): ?>
+<!--        --><?php //require 'templates/user_post_template.php' ?>
+<!--    --><?php //endforeach; ?>
     </div>
 </div>
+<script src="../js/get_method.js"></script>
+<script>
+    let session = <?= json_encode($_SESSION['user_info'] ?? []) ?>;
+    getPostsByDistroId(<?= $_GET['id' ]?>, session);
+</script>
 </body>
 </html>
