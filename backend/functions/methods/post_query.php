@@ -48,34 +48,27 @@ function checkUserIsExist($pdo, $username, $email): bool {
     return true;
 }
 
-function authorizationUser($pdo, $data) {
-    try {
-
-    } catch (PDOException $e) {
-        return ["error" => $e->getMessage()];
-    }
-
-}
-
-function checkAuthorizedUser($pdo, $username, $password) {
+function authorizationUser($pdo, $username, $password) {
     try {
         $sql = "SELECT id, password, user_role_id FROM users WHERE username = :username";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
+        $stmt->execute([':username' => $username]);
         if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 //            print_r($user);
             if (password_verify($password, $user['password'])) {
-                $response = [
+                return [
                     'user_id' => $user['id'],
                     'user_role_id' => $user['user_role_id']
                 ];
-                return $response;
+            } else {
+                return ["message" => "Неправильный пароль"];
             }
+        } else {
+            return ["message" => "Такого пользователя не существует"];
         }
     } catch (PDOException $e) {
-        echo $e->getMessage();
+        return ["error" => $e->getMessage()];
     }
 }
 function addCommentToPost($pdo, $post_id, $user_id, $comment) {

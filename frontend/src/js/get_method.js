@@ -28,37 +28,17 @@ async function getDistroList() {
     });
 }
 
-async function getPostsByDistroId(id, session) {
+async function getPostsByDistroIdAndCategory(id, session, category = -1) {
     console.log(`GET: Posts by id (${id})`);
     console.log(session);
 
     let res = await fetch(`${API_URL}/posts/${id}`);
     let posts = await res.json();
     const isAuth = session && session.user_id;
-    let form = isAuth ? `
-        <form action="../controller/add_comment_to_post.php?id=${id}" method="POST" class="d-flex gap-2">
-            <input type="hidden" name="post_id" value="${post.post_id}">
-                <input type="text" name="content" class="form-control form-control-sm" placeholder="Напишите ответ..." required>
-                    <button type="submit" class="btn btn-primary btn-sm px-3">Оставить комментарий</button>
-        </form>
-        ` : "";
 
     const postsContainer = document.querySelector(".posts");
     postsContainer.innerHTML = "";
 
-    // for (const post of posts) {
-    //     console.log(post);
-    //     let comments = await fetch(`${API_URL}/comments/${post.post_id}`);
-    //
-    //
-    // }
-
-    for (const post of posts) {
-        console.log(post);
-        let post_comments = await fetch(`${API_URL}/comments/${post.post_id}`);
-        let comments = await post_comments.json()
-        console.log(comments);
-    }
     for (const post of posts) {
         // console.log(post);
 
@@ -81,7 +61,6 @@ async function getPostsByDistroId(id, session) {
         if (session.user_info) {
             console.log(session)
         }
-        const isAuth = session && session.user_id;
         // console.log(isAuth);
         const formHtml = isAuth ? `
            <form action="../controller/add_comment_to_post.php?id=${id}" method="POST" class="d-flex gap-2">
@@ -125,4 +104,18 @@ async function getPostsByDistroId(id, session) {
              </div>
          `;
      }
+}
+
+async function getCommentByPostId(id) {
+    // TODO: Разделить логику
+}
+async function getPostsCategories() {
+    let response = await fetch(`${API_URL}/categories`)
+    let categories = await response.json();
+    console.log("Категории поста: ", categories);
+    categories.forEach((category) => {
+        document.querySelector(".select-category").innerHTML += `
+            <option value="${category.id}">${category.name}</option> 
+        `
+    });
 }

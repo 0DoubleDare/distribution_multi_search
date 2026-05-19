@@ -60,7 +60,9 @@ JOIN posts ON comments.post_id = posts.id WHERE posts.id = :id;
 }
 
 function getAllPostCategories($pdo) {
-    $sql = "";
+    $sql = "SELECT * FROM post_categories";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 

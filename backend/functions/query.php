@@ -51,10 +51,6 @@ function registrationUser($pdo, $data) {
     ]);
 }
 
-function authorizationUser($pdo, $data) {
-
-}
-
 function getUserById($pdo, $id) {
     $sql = "SELECT * FROM users WHERE users.id = :id";
     $stmt = $pdo->prepare($sql);

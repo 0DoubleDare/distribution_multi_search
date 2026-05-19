@@ -25,11 +25,11 @@ session_start()
         <label for="floatingSelect">Дистрибутив</label>
     </div>
     <form action="../controller/forum.php?id=<?= $_GET['id'] ?>" class="form-floating" method="post">
-        <select name="category_sort" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+        <select name="category_sort" class="form-select select-category" id="floatingSelect" aria-label="Floating label select example">
             <option selected value="-1">Все</option>
-            <?php foreach($categories as $category): ?>
-                <option value="<?php echo $category['id'] ?>"><?php echo $category['name'] ?></option>
-            <?php endforeach; ?>
+<!--            --><?php //foreach($categories as $category): ?>
+<!--                <option value="--><?php //echo $category['id'] ?><!--">--><?php //echo $category['name'] ?><!--</option>-->
+<!--            --><?php //endforeach; ?>
         </select>
         <label for="floatingSelect">Категория поста</label>
         <button class="btn btn-outline-primary" type="submit">Сортировать</button>
@@ -37,15 +37,17 @@ session_start()
     <a href="./add_post_redirect_controller.php?id=<?= $_GET['id']?>" class="btn btn-outline-secondary">Добавить пост</a>
     <a href="../index.php" class="btn btn-outline-secondary">На главную страницу</a>
     <div class="container posts">
-<!--    --><?php //foreach($posts as $post): ?>
-<!--        --><?php //require 'templates/user_post_template.php' ?>
-<!--    --><?php //endforeach; ?>
     </div>
 </div>
 <script src="../js/get_method.js"></script>
 <script>
+    getPostsCategories();
     let session = <?= json_encode($_SESSION['user_info'] ?? []) ?>;
-    getPostsByDistroId(<?= $_GET['id' ]?>, session);
+
+    function sort_posts() {
+
+    }
+    getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session);
 </script>
 </body>
 </html>

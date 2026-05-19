@@ -39,6 +39,9 @@ switch ($method) {
                     echo getUserById($pdo, $id);
                 }
                 break;
+                case "categories":
+                    echo json_encode(getAllPostCategories($pdo));
+                    break;
         }
         break;
     case "POST":
@@ -57,8 +60,14 @@ switch ($method) {
 
                 break;
             case "authorization":
-                authorizationUser($pdo, $data);
-
+                $user_info = authorizationUser($pdo, $data['username'], $data['password']);
+                if (isset($user_info['user_id']) && $data['remember_me']) {
+                    $_SESSION['user_info'] = $user_info;
+                }
+                if (isset($user_info['message'])) {
+                    $_SESSION['message'] = $user_info['message'];
+                }
+                echo json_encode($user_info);
                 break;
             case "posts":
                 if (isset($id)) {
