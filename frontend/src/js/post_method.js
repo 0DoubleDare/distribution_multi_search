@@ -31,9 +31,16 @@ async function insertPost(data) {
     // const data = conventForm(data);
     const response = await sendDataToApi(`${API_URL}/posts/${data.distribution_id}`, data);
 
+    console.log(response);
     if (response.id) {
         return true;
     }
-    console.log(response.id);
     return false;
+}
+
+async function insertCommentToPost(data) {
+    console.log("insert comment")
+    const response = await sendDataToApi(`${API_URL}/comments/${data.post_id}`, data)
+
+    console.log(response);
 }

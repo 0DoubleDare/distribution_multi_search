@@ -32,6 +32,7 @@ session_start()
     </div>
 </div>
 <script src="../js/get_method.js"></script>
+<script src="../js/post_method.js"></script>
 <script src="../js/common.js"></script>
 <script>
     getPostsCategories();
@@ -41,7 +42,17 @@ session_start()
     // WARN: СОРТИРОВКА ПО КАТЕГОРИЯМ НЕ РАБОТАЕТ
     sort_posts(-1);
     function sort_posts(category_id) {
-        getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session, category_id);
+        getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session, category_id,);
+    }
+
+    async function insert_comment(event) {
+        event.preventDefault();
+        const form = document.getElementById('insert_comment_form');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        await insertCommentToPost(data);
+        window.location.reload();
     }
 
 </script>

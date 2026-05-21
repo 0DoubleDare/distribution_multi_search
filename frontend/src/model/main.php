@@ -151,5 +151,5 @@ function addCommentToPost($pdo, $post_id, $user_id, $comment) {
         ':user_id' => $user_id,
         ':content' => $comment
     ]);
-    return $pdo->lastInsertId();
+    return ['id' => $pdo->lastInsertId()];
 }

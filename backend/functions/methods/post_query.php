@@ -71,17 +71,17 @@ function authorizationUser($pdo, $username, $password) {
         return ["error" => $e->getMessage()];
     }
 }
-function addCommentToPost($pdo, $post_id, $user_id, $comment) {
+function addCommentToPost($pdo, $post_id, $data) {
     $sql =
         "INSERT INTO comments(post_id, user_id, content) 
         VALUES(:post_id, :user_id, :content)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         ':post_id' => $post_id,
-        ':user_id' => $user_id,
-        ':content' => $comment
+        ':user_id' => $data['user_id'],
+        ':content' => $data['content']
     ]);
-    return json_encode($pdo->lastInsertId());
+    return ['id' => $pdo->lastInsertId()];
 }
 
 function insertPost($pdo, $data) {
@@ -91,7 +91,7 @@ function insertPost($pdo, $data) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute($data);
         http_response_code(200);
-        return $pdo->lastInsertId();
+        return ['id' => $pdo->lastInsertId()];
     } catch (PDOException $e){
         return [
             'status_code' => $e->getCode(),

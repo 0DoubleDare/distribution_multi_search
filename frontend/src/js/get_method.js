@@ -62,8 +62,9 @@ async function getPostsByDistroIdAndCategory(id, session, category = -1) {
         }
         // console.log(isAuth);
         const formHtml = isAuth ? `
-           <form action="../controller/add_comment_to_post.php?id=${id}" method="POST" class="d-flex gap-2">
+           <form method="POST" class="d-flex gap-2" id="insert_comment_form" onsubmit="insert_comment(event)">
                  <input type="hidden" name="post_id" value="${post.post_id}">
+                 <input type="hidden" name="user_id" value="${session.user_id}">
                  <input type="text" name="content" class="form-control form-control-sm" placeholder="Напишите ответ..." required>
                 <button type="submit" class="btn btn-primary btn-sm px-3">Оставить комментарий</button>
              </form>

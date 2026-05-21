@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION['user_info']['user_id'])) {
-    header("Location: ../main_forum?" . $_GET['id']);
+    header("Location: ../controller/forum.php?id=" . $_GET['id']);
 }
 ?>
 <!doctype html>

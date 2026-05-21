@@ -71,13 +71,13 @@ switch ($method) {
             case "posts":
                 if (isset($id)) {
                     $result = insertPost($pdo, $data);
-                    echo json_encode(['id' => $result]);
+                    echo json_encode($result);
                 }
                 break;
             case "comments":
                 if (isset($id)) {
-                    $result = addCommentToPost($pdo, $id, $_POST['user_id'], $_POST['content']);
-                    echo json_encode(['id' => $result]);
+                    $result = addCommentToPost($pdo, $id, $data);
+                    echo json_encode($result);
                 }
                 break;
         }
