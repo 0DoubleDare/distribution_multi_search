@@ -1,7 +1,8 @@
 
-async function conventForm(form){
-    const formData = new FormData(form);
-    return Object.fromEntries(formData.entries());
+async function convertForm(form){
+    const data = new FormData(form);
+    const popa = Object.fromEntries(data.entries());
+    return popa;
 }
 
 async function sendDataToApi(url, data) {

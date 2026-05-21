@@ -1,25 +1,31 @@
 const API_URL = "http://localhost/distro_multi_search/backend";
 
-async function registrationUser(form) {
+async function registrationUser(data) {
     console.log("register");
-    const data = conventForm(form);
     console.log(JSON.stringify(data));
+
     const user_info = await sendDataToApi(`${API_URL}/registration`, data);
     if (user_info.user_id) {
         console.log("УСПЕШНАЯ РЕГИСТРАЦИЯ");
+        return true;
     }
+
     console.log(user_info)
+    return false;
 }
 
-async function authorizationUser(form) {
+async function authorizationUser(data) {
     console.log("authorization");
-    const data = conventForm(form);
     console.log(JSON.stringify(data))
-    const user_info = await sendDataToApi(`${API_URL}/authorization`, data)
-    if (user_info.user_id) {
+
+    const response = await sendDataToApi(`${API_URL}/authorization`, data)
+    console.log(response);
+
+    if (response.user_id) {
         console.log("УСПЕШНАЯ АВТОРИЗАЦИЯ");
+        return true;
     }
-    console.log(user_info);
+    return false;
 }
 
 async function insertPost(form) {

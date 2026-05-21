@@ -4,10 +4,10 @@ function registrationUserByForm($pdo, $data) {
     try {
         if ($data['password'] == $data['repeat_password']) {
             if (checkUserIsExist($pdo, $data['username'], $data['email'])) {
-                return [ "message" => "Имя пользователя или почта уже заняты"];
+                return [ "message" => "Username or email is busy"];
             }
         } else {
-            return [ "message" => "Пароли не совпадают"];
+            return [ "message" => "Password and repeat password do not match"];
         }
 //        checkAuthorizedUser($pdo, $data['username'], $data['password']);
         $sql = "
@@ -85,9 +85,18 @@ function addCommentToPost($pdo, $post_id, $user_id, $comment) {
 }
 
 function insertPost($pdo, $data) {
-    $sql = "INSERT INTO posts(user_id, title, content, distribution_id, category_id)
+    try {
+        $sql = "INSERT INTO posts(user_id, title, content, distribution_id, category_id)
     VALUES(:user_id, :title, :content, :distribution_id, :category_id)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($data);
-    return $pdo->lastInsertId();
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($data);
+        http_response_code(200);
+        return $pdo->lastInsertId();
+    } catch (PDOException $e){
+        return [
+            'status_code' => $e->getCode(),
+            'error' => $e->getMessage(),
+        ];
+    }
+
 }

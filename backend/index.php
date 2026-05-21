@@ -50,7 +50,7 @@ switch ($method) {
         switch ($type) {
             case "registration":
                 $user_info = registrationUserByForm($pdo, $data);
-                if (isset($user_info['user_id']) && $data['remember_me']) {
+                if (isset($user_info['user_id']) && isset($data['remember_me'])) {
                     $_SESSION['user_info'] = $user_info;
                 }
                 if (isset($user_info['message'])) {
@@ -61,7 +61,7 @@ switch ($method) {
                 break;
             case "authorization":
                 $user_info = authorizationUser($pdo, $data['username'], $data['password']);
-                if (isset($user_info['user_id']) && $data['remember_me']) {
+                if (isset($user_info['user_id']) && isset($data['remember_me'])) {
                     $_SESSION['user_info'] = $user_info;
                 }
                 if (isset($user_info['message'])) {

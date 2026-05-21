@@ -12,46 +12,48 @@
 </head>
 <body>
 <div class="container">
-<!--<form action="../../controller/register_user.php" method="post">-->
     <form method="post" id="registration_form" onsubmit="send_data(event)">
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Отображаемое имя</label>
-        <input name="display_name" type="text" class="form-control" id="exampleInputPassword1" required>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Имя пользователя</label>
-        <input name="username" type="text" class="form-control" id="exampleInputPassword1" required>
-        <div id="emailHelp" class="form-text">Уникальное имя пользователя</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
-        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-        <div id="emailHelp" class="form-text">Не показывайте свою почту кому попало</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Пароль</label>
-        <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
-        <div id="emailHelp" class="form-text">Придумайте самый надежный пароль</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Повторите пароль</label>
-        <input name="repeat_password" type="password" class="form-control" id="exampleInputPassword1" required>
-    </div>
-    <div class="mb-3 form-check">
-        <input name="remember_me" type="checkbox" value="true" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1" >Запомнить меня</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
-</form>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Отображаемое имя</label>
+            <input name="display_name" type="text" class="form-control" id="exampleInputPassword1" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Имя пользователя</label>
+            <input name="username" type="text" class="form-control" id="exampleInputPassword1" required>
+            <div id="emailHelp" class="form-text">Уникальное имя пользователя</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>
+            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            <div id="emailHelp" class="form-text">Не показывайте свою почту кому попало</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Пароль</label>
+            <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+            <div id="emailHelp" class="form-text">Придумайте самый надежный пароль</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Повторите пароль</label>
+            <input name="repeat_password" type="password" class="form-control" id="exampleInputPassword1" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input name="remember_me" type="checkbox" value="true" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1" >Запомнить меня</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться!</button>
+    </form>
 </div>
 <script src="../../js/post_method.js"></script>
+<script src="../../js/common.js"></script>
 <script>
-    function send_data(event) {
+    async function send_data(event) {
         event.preventDefault();
         const form = document.getElementById('registration_form');
-        registrationUser(form)
-        // const data = new FormData(form);
-        // const popa = Object.fromEntries(data.entries());
+        const data = new FormData(form);
+        const newData = Object.fromEntries(data.entries());
+        if ( await registrationUser(newData)) {
+            window.location.href = "../../index.php";
+        }
         // console.log(JSON.stringify(popa))
     }
 </script>

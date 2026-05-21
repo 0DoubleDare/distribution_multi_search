@@ -44,10 +44,11 @@ session_start()
     getPostsCategories();
     let session = <?= json_encode($_SESSION['user_info'] ?? []) ?>;
 
-    function sort_posts() {
-
+    sort_posts(-1);
+    function sort_posts(category_id) {
+        getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session, category_id);
     }
-    getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session);
+
 </script>
 </body>
 </html>

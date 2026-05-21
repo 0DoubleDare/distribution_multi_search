@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <form onsubmit="send_form(event)" method="post" id="authorization_form">
+    <form onsubmit="send_data(event)" method="post" id="authorization_form">
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Имя пользователя</label>
             <input name="username" type="text" class="form-control" id="exampleInputPassword1" required>
@@ -31,18 +31,23 @@
 <!--            <div id="emailHelp" class="form-text">Ваш пароль</div>-->
         </div>
         <div class="mb-3 form-check">
-            <input name="remember_me" type="checkbox" value="true" class="form-check-input" id="exampleCheck1">
+            <input name="remember_me" type="checkbox" value="true" class="form-check-input" id="exampleCheck1" checked>
             <label class="form-check-label" for="exampleCheck1" >Запомнить меня</label>
         </div>
         <button type="submit" class="btn btn-primary">Войти</button>
     </form>
 </div>
 <script src="../../js/post_method.js"></script>
+<script src="../../js/common.js"></script>
 <script>
-    function send_form(event) {
+    async function send_data(event) {
         event.preventDefault();
         const form = document.getElementById('authorization_form')
-        authorizationUser(form);
+        const data = new FormData(form);
+        const newData = Object.fromEntries(data.entries());
+        if (await authorizationUser(newData)) {
+            window.location.href = "../../index.php";
+        }
     }
 </script>
 </body>
