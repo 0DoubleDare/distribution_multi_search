@@ -1,5 +1,3 @@
-const API_URL = "http://localhost/distro_multi_search/backend";
-
 async function registrationUser(data) {
     console.log("register");
     console.log(JSON.stringify(data));
@@ -28,11 +26,14 @@ async function authorizationUser(data) {
     return false;
 }
 
-async function insertPost(form) {
+async function insertPost(data) {
     console.log("insert post")
-    const data = conventForm(form);
-    const response = await sendDataToApi(`${API_URL}/posts/${data.id}`);
-    // let response = await fetch(`${API_URL}/posts/${data.id}`, {
-    //     method: 'POST',
-    // })
+    // const data = conventForm(data);
+    const response = await sendDataToApi(`${API_URL}/posts/${data.distribution_id}`, data);
+
+    if (response.id) {
+        return true;
+    }
+    console.log(response.id);
+    return false;
 }

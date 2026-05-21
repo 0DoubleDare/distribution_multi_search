@@ -1,5 +1,3 @@
-const API_URL = "http://localhost/distro_multi_search/backend";
-
 async function getDistroList() {
     let res = await fetch(`${API_URL}/distros`);
     let list = await res.json();
@@ -27,6 +25,7 @@ async function getDistroList() {
         `;
     });
 }
+
 
 async function getPostsByDistroIdAndCategory(id, session, category = -1) {
     console.log(`GET: Posts by id (${id})`);
@@ -118,4 +117,18 @@ async function getPostsCategories() {
             <option value="${category.id}">${category.name}</option> 
         `
     });
+}
+
+async function getDistroListAsCategory(id) {
+    let res = await fetch(`${API_URL}/distros`);
+    let distros = await res.json();
+    console.log(distros);
+    distros.forEach((distro) => {
+        document.querySelector('.select-distro-list').innerHTML += `
+            <option value="${distro.id}" ${ id == distro.id ? 'selected' : '' }>${distro.name}</option>  
+        `
+    })
+}
+async function getDistributionListAsCategory() {
+    let response = await fetch(`${API_URL}/`)
 }

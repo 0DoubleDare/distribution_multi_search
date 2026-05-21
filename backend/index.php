@@ -8,7 +8,6 @@ require "./functions/methods/post_query.php";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
-header("Access-Control-Allow-Methods: *");
 header("Content-type: application/json");
 
 $method = $_SERVER["REQUEST_METHOD"];
@@ -71,12 +70,14 @@ switch ($method) {
                 break;
             case "posts":
                 if (isset($id)) {
-
+                    $result = insertPost($pdo, $data);
+                    echo json_encode(['id' => $result]);
                 }
                 break;
             case "comments":
                 if (isset($id)) {
-                    echo addCommentToPost($pdo, $id, $_POST['user_id'], $_POST['content']);
+                    $result = addCommentToPost($pdo, $id, $_POST['user_id'], $_POST['content']);
+                    echo json_encode(['id' => $result]);
                 }
                 break;
         }

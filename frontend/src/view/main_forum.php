@@ -15,35 +15,30 @@ session_start()
 <body>
 <div class="container">
     <div class="form-floating">
-        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" disabled>
-            <?php foreach($distros as $dist): ?>
-                <option value="<?php echo $dist['id'] ?>" <?= $dist['id'] == $_GET['id'] ? 'selected' : '' ?>>
-                    <?php echo $dist['name'] ?>
-                </option>
-            <?php endforeach; ?>
+        <select class="form-select select-distro-list" id="floatingSelect select-distro-list" aria-label="Floating label select example" disabled>
         </select>
         <label for="floatingSelect">Дистрибутив</label>
     </div>
     <form action="../controller/forum.php?id=<?= $_GET['id'] ?>" class="form-floating" method="post">
         <select name="category_sort" class="form-select select-category" id="floatingSelect" aria-label="Floating label select example">
             <option selected value="-1">Все</option>
-<!--            --><?php //foreach($categories as $category): ?>
-<!--                <option value="--><?php //echo $category['id'] ?><!--">--><?php //echo $category['name'] ?><!--</option>-->
-<!--            --><?php //endforeach; ?>
         </select>
         <label for="floatingSelect">Категория поста</label>
         <button class="btn btn-outline-primary" type="submit">Сортировать</button>
     </form>
-    <a href="./add_post_redirect_controller.php?id=<?= $_GET['id']?>" class="btn btn-outline-secondary">Добавить пост</a>
+    <a href="../view/add_post_view.php?id=<?= $_GET['id']?>" class="btn btn-outline-secondary">Добавить пост</a>
     <a href="../index.php" class="btn btn-outline-secondary">На главную страницу</a>
     <div class="container posts">
     </div>
 </div>
 <script src="../js/get_method.js"></script>
+<script src="../js/common.js"></script>
 <script>
     getPostsCategories();
+    getDistroListAsCategory(<?= $_GET['id'] ?>);
     let session = <?= json_encode($_SESSION['user_info'] ?? []) ?>;
 
+    // WARN: СОРТИРОВКА ПО КАТЕГОРИЯМ НЕ РАБОТАЕТ
     sort_posts(-1);
     function sort_posts(category_id) {
         getPostsByDistroIdAndCategory(<?= $_GET['id' ]?>, session, category_id);

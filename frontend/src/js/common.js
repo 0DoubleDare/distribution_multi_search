@@ -1,3 +1,4 @@
+const API_URL = "http://localhost/distro_multi_search/backend";
 
 async function convertForm(form){
     const data = new FormData(form);
